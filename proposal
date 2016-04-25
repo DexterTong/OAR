@@ -1,0 +1,39 @@
+Dexter Tong
+
+Final Project Proposal
+Natural Language Processing
+
+1 Problem Statement
+
+How can the opinions of an online ”community” be captured? More specifically, I will investigate the opinions
+of users of reddit.com (a very large forum) regarding this year’s US presidential candidates. I will implement
+some kind of sentiment analysis, tailoring it for my focus on the 2016 election, to see how members of reddit
+tend to feel about the presidential candidates (Clinton, Sanders, Trump, Cruz, and maybe even Kasich) and
+those candidates’ stances on various political issues.
+
+2 Strategy
+
+I plan to analyze each post as follows: searching either in the same sentence, or adjacent ones, or within the
+same paragraph, to guess which candidate and what issue the post is talking about, and the post author’s
+sentiment towards it (Likely using a bag-of-words model for simplicity). Reddit has an interesting voting
+feature, in which other users can ”upvote” or ”downvote” the posts of others that they agree with, or disagree
+with, respectively. This could be employed as a weighting factor to determine the overall sentiment of various
+politics-related reddit subforums*: Highly-voted posts are likely to contain sentiments that agree with the
+majority. There would also need to be filtering done on post content or vote totals: Highly ”downvoted”
+posts should probably be ignored, and very short posts, say only a few words long, or even profane ones, are
+unlikely to contain a meaningful opinion. Going into this, I think that a reasonable representation for posts
+could be a 4-tuple containing (1) the candidate’s name, (2) some election topic, (3) the poster’s opinion of the
+candidate’s stance on the topic, and (4) a weighting factor based on voting. From this data, various statistics
+could be produced, such as the overall political leanings of a subforum of reddit.
+*For example, https://www.reddit.com/r/hillaryclinton is a subforum of reddit that mostly contains dis-
+cussions and posts by reddit users who support Hillary Clinton. Posts there could perhaps be compared to
+those of Sanders supporters, for instance.
+A suitably large corpus can be assembled quickly through a web scraper, given the high level of activity
+on reddit. I plan to build by sentiment analyzer on a training corpus that I will create, using a selection of
+posts and manually annotating them. With regards to the post’s opinion, it may be best to categorize them
+as postive, neutral, and negative, given the difficulty of objectively rating feelings. This is likely what my
+system will categorize posts as too, though I will explore trying to calculate a more fine-grained metric. If I
+stick with the bag-of-words model, this would mean counting the number of positive versus negative words in
+a sentence, or something similar.
+This is out of the intended scope of my project, but this could possibly be extended to other internet/social
+media discussion platforms.
