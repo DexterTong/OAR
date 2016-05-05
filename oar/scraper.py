@@ -1,12 +1,6 @@
 import praw
 import nltk
 r = praw.Reddit(user_agent='opinion_analysis_for_reddit')
-bernie = r.get_subreddit('sandersforpresident')
-hillary = r.get_subreddit('hillaryclinton')
-
-# Trump's subreddit is full of jokes (memes) and very little serious content
-# donald = r.get_subreddit('the_donald')
-# There is very little activity on the subreddits of the other candidates: Cruz, Rubio, Kasich, Stein, Johnson, etc
 
 
 def parse_corpus(sentence):
@@ -45,27 +39,54 @@ def ext_features(doc):
         features['contains(%s)' % word] = (word in doc_words)
     return features
 
-i = 10
-#posts = hillary.get_hot(limit = i)
+
+def scrape_comments(sub, mode, num):
+    if sub == 'sanders':
+        subreddit = r.get_subreddit('sandersforpresident')  # Bernie Sanders
+    elif sub == 'clinton':
+        subreddit = r.get_subreddit('hillaryclinton')       # Hillary Clinton
+    elif sub == 'trump':
+        subreddit = r.get_subreddit('the_donald')           # Donald Trump, full of memes and trolling => Waste of time
+    elif sub == 'politics':
+        subreddit = r.get_subreddit('politics')             # Political discussion, pro-Bernie, anti-Hillary
+    elif sub == 'politicaldiscussion':
+        subreddit = r.get_subreddit('politicaldiscussion')  # Civil political discussion, seems rather neutral
+    else:
+        raise ValueError('Which subreddit do you want to scrape?')
+        # Not enough people talk about the other candidates, remaining or not, to analyze anything. Sorry Independents!
+    if mode == 1:
+        all_posts = subreddit.get_hot(limit=num)
+        for post in all_posts:
+            comments = praw.helpers.flatten_tree(post.comments)
+            for comment in comments:
+                if hasattr(comment, 'body'):
+                    continue
+                else:   # If the comment object has no content, i.e. 'load more comments'
+                    continue
+    elif mode == 2:
+        pass
+    else:
+        raise ValueError('Which mode? 1 = grab from posts, 2 = grab comments directly')
+
+
 corpus = []
 f = open('../corpora/hillary_train')
 for line in f:
     corpus.append(parse_corpus(line))
-
 all_words = []
 for comment in corpus:
     new_words = get_words_in_comments(comment[0])
     for word in new_words:
         all_words.append(word.rstrip('.'))
 word_features = get_features(all_words)
-#print(word_features)
-#features = ext_features(['i', 'love', 'hillary'], word_features)
-#print(features)
-
 training_set = nltk.classify.apply_features(ext_features, corpus)
-for line in training_set:
-    print(line)
+#classifier = nltk.NaiveBayesClassifier(training_set)
+#for line in training_set:
+#    print(line)
 
+
+
+#posts = hillary.get_hot(limit = i)
 post = r.get_submission(submission_id='4gm30h')
 for x in range(1, 2):
     #post = next(posts)
