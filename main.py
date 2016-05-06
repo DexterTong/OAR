@@ -3,8 +3,8 @@ import os
 from oar import trainer, scraper
 
 
-#Trainer = trainer.Trainer('hillary_bernie1')
-Trainer = trainer.Trainer('hillary1')
+#Trainer = trainer.Trainer('bernie1')
+Trainer = trainer.Trainer('all')
 classifier = Trainer.Classifier
 extractor = Trainer.Extractor
 Scraper = scraper.Scraper()

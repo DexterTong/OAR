@@ -1,4 +1,6 @@
-import nltk, string
+import nltk
+from string import punctuation
+import os
 from .extractor import Extractor
 
 # Builds the classifier from training corpora
@@ -20,7 +22,7 @@ class Trainer:
         s2 = s1[0].split()
         s3 = []
         for word in s2:
-            s3.append(word.strip(string.punctuation))
+            s3.append(word.strip(punctuation))
         s1[0] = s3
         # if len(s1) == 2:
         #     if 'positive' in s1[1] or 'negative' in s1[1]:
@@ -49,15 +51,23 @@ class Trainer:
     @staticmethod
     def train_classifier(self, source):
         corpus = []
-        if self.source == '':
-            f = open('../corpora/hillary1')
-            print("Using corpora/hillary1")
+        if self.source == 'all':
+            for filename in os.listdir('../corpora'):
+                if filename != 'about' and filename != 'editor.py':
+                    f = open('../corpora/' + filename)
+                    for line in f:
+                        corpus.append(Trainer.parse_corpus(line))
+                    f.close()
         else:
-            f = open('../corpora/' + self.source)
-            print("Using corpora/" + self.source)
-        for line in f:
-            corpus.append(Trainer.parse_corpus(line))
-        f.close()
+            if self.source == '':
+                f = open('../corpora/hillary1')
+                print("Using corpora/hillary1")
+            else:
+                f = open('../corpora/' + self.source)
+                print("Using corpora/" + self.source)
+            for line in f:
+                corpus.append(Trainer.parse_corpus(line))
+            f.close()
         all_words = []
         for comment in corpus:
             new_words = Trainer.get_words_in_comments(comment[0])
