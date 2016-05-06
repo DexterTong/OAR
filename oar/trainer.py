@@ -7,12 +7,8 @@ from .extractor import Extractor
 
 
 class Trainer:
-    source = ''
-    Extractor = None
-    Classifier = None
 
-    def __init__(self, source):
-        self.source = source
+    def __init__(self):
         return
 
     @staticmethod
@@ -75,7 +71,5 @@ class Trainer:
         word_features = Trainer.get_features(all_words)
         Trainer.Extractor = Extractor(word_features)
         training_set = nltk.classify.apply_features(Extractor.ext_features, corpus)
-        #print(training_set)
         classifier = nltk.NaiveBayesClassifier.train(training_set)
-        Trainer.Classifier = classifier
-        return (classifier, Extractor)
+        return classifier, Extractor

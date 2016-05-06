@@ -8,12 +8,17 @@ All of the corpora come from reddit comments on the following subreddits:
 
 A particular thread is hand-picked and then comments are annotated manually. They are rated either negative or positive, or simply discarded.
 
-hillary1: https://www.reddit.com/r/hillaryclinton/comments/499mxz/hello_this_is_my_first_time_on_reddit_as_you/
+hillary1: https://www.reddit.com/r/hillaryclinton/comments/499mxz
     Mostly positive and pro-Hillary, consists of responses to Hillary saying hello to her supporters
 
-hillary_bernie1: https://www.reddit.com/r/PoliticalDiscussion/comments/4euxj8/clinton_and_sanders_supporters_what_impressed_you/
+hillary_bernie1: https://www.reddit.com/r/PoliticalDiscussion/comments/4euxj8
     Relatively balanced discussion between Bernie and Hillary supporters
 
-bernie1: https://www.reddit.com/r/SandersForPresident/comments/4ekmft/why_im_supporting_bernie_sanders_by_senator_jeff/
+bernie1: https://www.reddit.com/r/SandersForPresident/comments/4ekmft
     pro-Bernie, anti-Hillary, endorsement of Sanders by Sen. Merkley
 
+bernie2: https://www.reddit.com/r/PoliticalDiscussion/comments/4i65hm
+    fairly anti-Bernie, regarding his requests for changes in the DNC
+
+bernie 3: https://www.reddit.com/r/PoliticalDiscussion/comments/4dvxnw
+    fairly anti-Bernie, Paul Krugman's assessment of Bernie's economic stance

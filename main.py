@@ -8,7 +8,7 @@ from oar import trainer, scraper, analyzer
 #classifier = Trainer.Classifier
 #extractor = Trainer.Extractor
 
-CE = trainer.Trainer('bernie1').train_classifier('bernie1')
+CE = trainer.Trainer().train_classifier('all')
 classifier = CE[0]
 extractor = CE[1]
 Scraper = scraper.Scraper()

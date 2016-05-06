@@ -54,7 +54,7 @@ class Scraper:
         return scraped_comments
 
     def read_corpus(self, filename):
-        f = open(test_dir + filename, 'rt')
+        f = open(self.test_dir + filename, 'rt')
         comments = []
         for line in f:
             comment = []
