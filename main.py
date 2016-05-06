@@ -1,33 +1,26 @@
 import pickle
 import os
-from oar import trainer
+from oar import trainer, scraper
 
-save_dir = 'temp/'            # Where to save classifier, extractor, etc
-nbc_fn = 'classifier'               # What to save the Naive Bayes Classifier as
-ext_fn = 'extractor'                # Filename of saved extractor
 
-if os.path.exists(save_dir + nbc_fn + '.pkl') and os.path.exists(save_dir + ext_fn + '.pkl'):
-    saved_nbc = open(save_dir + nbc_fn + '.pkl', 'rb')
-    classifier = pickle.load(saved_nbc)
-    saved_nbc.close()
-    saved_ext = open(save_dir + ext_fn + '.pkl', 'rb')
-    extractor = pickle.load(saved_ext)
-    saved_ext.close()
-else:
-    Trainer = trainer.Trainer('')
-    classifier = Trainer.Classifier
-    extractor = Trainer.Extractor
-    os.makedirs(save_dir)
-    saved_nbc = open(save_dir + nbc_fn + '.pkl', 'wb')
-    pickle.dump(classifier, saved_nbc, -1)
-    saved_nbc.close()
-    saved_ext = open(save_dir + ext_fn + '.pkl', 'wb')
-    pickle.dump(extractor, saved_ext, -1)
-    saved_ext.close()
+Trainer = trainer.Trainer('hillary_bernie1')
+classifier = Trainer.Classifier
+extractor = Trainer.Extractor
+Scraper = scraper.Scraper()
 
 #print(Trainer.parse_corpus("I want to make America great again... Don't you think so? Huh!|p|t"))
-#print(Trainer.Classifier.show_most_informative_features(10))
+#print(classifier.show_most_informative_features(50))
+#print(classifier.classify(extractor.ext_features(test.split())))
+#print(classifier._label_probdist.prob('positive'))
+#print(classifier._label_probdist.prob('negative'))
 
-
-test = "Good to hear it. Now, onward to victory!"
-print(classifier.classify(extractor.ext_features(test.split())))
+#comments = Scraper.scrape_comments('clinton', 1)
+comments = Scraper.scrape_comments('4euxj8', 1)
+i = 0
+j = 0
+for comment in comments:
+    if classifier.classify(extractor.ext_features(comment)) == 'positive':
+        i += 1
+    else:
+        j += 1
+print('positive: ', i, ' negative: ', j)

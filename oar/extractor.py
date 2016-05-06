@@ -14,5 +14,4 @@ class Extractor:
         features = {}
         for word in Extractor.word_features:
             features['contains(%s)' % word] = (word in doc_words)
-        print(features)
         return features
