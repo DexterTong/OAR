@@ -4,6 +4,8 @@ from string import punctuation
 
 class Scraper:
     r = None
+    #test_dir = '../test/'
+    test_dir = '../corpora/'        # Until I get test sets built
 
     def __init__(self):
         self.r = praw.Reddit(user_agent='opinion_analysis_for_reddit')
@@ -50,3 +52,16 @@ class Scraper:
             else:  # If the comment object has no content, i.e. 'load more comments'
                 continue
         return scraped_comments
+
+    def read_corpus(self, filename):
+        f = open(test_dir + filename, 'rt')
+        comments = []
+        for line in f:
+            comment = []
+            raw_text = line.split('\t')[0]
+            tokenized = raw_text.lower().split()
+            for word in tokenized:
+                comment.append(word.strip(punctuation))
+            comments.append(comment)
+        f.close()
+        return comments

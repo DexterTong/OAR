@@ -13,7 +13,6 @@ class Trainer:
 
     def __init__(self, source):
         self.source = source
-        self.train_classifier(self, self.source)
         return
 
     @staticmethod
@@ -49,9 +48,9 @@ class Trainer:
         return wordfeatures
 
     @staticmethod
-    def train_classifier(self, source):
+    def train_classifier(source):
         corpus = []
-        if self.source == 'all':
+        if source == 'all':
             for filename in os.listdir('../corpora'):
                 if filename != 'about' and filename != 'editor.py':
                     f = open('../corpora/' + filename)
@@ -59,12 +58,12 @@ class Trainer:
                         corpus.append(Trainer.parse_corpus(line))
                     f.close()
         else:
-            if self.source == '':
+            if source == '':
                 f = open('../corpora/hillary1')
                 print("Using corpora/hillary1")
             else:
-                f = open('../corpora/' + self.source)
-                print("Using corpora/" + self.source)
+                f = open('../corpora/' + source)
+                print("Using corpora/" + source)
             for line in f:
                 corpus.append(Trainer.parse_corpus(line))
             f.close()
@@ -79,4 +78,4 @@ class Trainer:
         #print(training_set)
         classifier = nltk.NaiveBayesClassifier.train(training_set)
         Trainer.Classifier = classifier
-        return
+        return (classifier, Extractor)

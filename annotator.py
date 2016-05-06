@@ -3,9 +3,10 @@ import praw
 import sys
 
 corp_dir = 'corpora'
+test_dir = 'test'
 
 if len(sys.argv) < 3:
-    print('Please provide 2 arguments: the submission ID of the post to scrape, and filename for new corpus')
+    print('Usage: python3 annotator.py <submission ID> <destination>')
     quit(1)
 f = open(corp_dir + '/' + sys.argv[2], 'x')     # If a FileExistsError pops up, pick a new filename
 r = praw.Reddit(user_agent='opinion_analysis_for_reddit')
@@ -19,7 +20,8 @@ for comment in comments:
     if hasattr(comment, 'body'):
         text = comment.body.replace('\n', '')
         print(text)
-        tone = input('\033[92m' + str(i) + ": Is this (1) positive or (2) negative? (3) to discard, (4) to exit: \033[0m")
+        tone = input('\033[92m' + str(i) +
+                     ": Is this (1) positive or (2) negative? (3) to discard, (4) to exit: \033[0m")
         if tone == '4':
             f.close()
             break
