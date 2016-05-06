@@ -22,13 +22,14 @@ class Trainer:
         for word in s2:
             s3.append(word.strip(string.punctuation))
         s1[0] = s3
-        if len(s1) == 2:
-            if 'positive' in s1[1] or 'negative' in s1[1]:
-                s1[2] = ''
-            else:
-                s1[2] = s1[1]
-                s1[1] = ''
-        s1[2] = s1[2].rstrip('\n')
+        # if len(s1) == 2:
+        #     if 'positive' in s1[1] or 'negative' in s1[1]:
+        #         s1[2] = ''
+        #     else:
+        #         s1[2] = s1[1]
+        #         s1[1] = ''
+        # s1[2] = s1[2].rstrip('\n')
+        s1[1] = s1[1].rstrip('\n')
         s3 = tuple(s1)
         return s3
 
@@ -50,10 +51,10 @@ class Trainer:
         corpus = []
         if self.source == '':
             f = open('../corpora/hillary1')
-            print("Using original")
+            print("Using corpora/hillary1")
         else:
             f = open('../corpora/' + self.source)
-            print("Using other source")
+            print("Using corpora/" + self.source)
         for line in f:
             corpus.append(Trainer.parse_corpus(line))
         f.close()
@@ -65,7 +66,7 @@ class Trainer:
         word_features = Trainer.get_features(all_words)
         Trainer.Extractor = Extractor(word_features)
         training_set = nltk.classify.apply_features(Extractor.ext_features, corpus)
-        print(training_set)
+        #print(training_set)
         classifier = nltk.NaiveBayesClassifier.train(training_set)
         Trainer.Classifier = classifier
         return

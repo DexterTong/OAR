@@ -3,7 +3,8 @@ import os
 from oar import trainer, scraper
 
 
-Trainer = trainer.Trainer('hillary_bernie1')
+#Trainer = trainer.Trainer('hillary_bernie1')
+Trainer = trainer.Trainer('hillary1')
 classifier = Trainer.Classifier
 extractor = Trainer.Extractor
 Scraper = scraper.Scraper()
@@ -16,11 +17,11 @@ Scraper = scraper.Scraper()
 
 #comments = Scraper.scrape_comments('clinton', 1)
 comments = Scraper.scrape_comments('4euxj8', 1)
-i = 0
-j = 0
+pos = 0
+neg = 0
 for comment in comments:
     if classifier.classify(extractor.ext_features(comment)) == 'positive':
-        i += 1
+        pos += 1
     else:
-        j += 1
-print('positive: ', i, ' negative: ', j)
+        neg += 1
+print('positive: ', pos, ' negative: ', neg)
