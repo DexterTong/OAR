@@ -23,6 +23,6 @@ scorer = scorer.Scorer()
 
 comments = Scraper.read_corpus(test_corpus, 0)
 results = analyzer.analyze(comments, classifier, extractor)
-print(results)
+#print(results)
 scorer.score(results, test_corpus)
 #print(classifier.show_most_informative_features(50))

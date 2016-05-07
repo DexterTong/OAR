@@ -37,8 +37,8 @@ class Analyzer:
                     results.append(['negative', 'bernie'])
                 else:
                     results.append(['negative', '?'])
-                print('\033[91m', subject, ': \033[0m', end='')
-            print(' '.join(comment))
+                #print('\033[91m', subject, ': \033[0m', end='')
+            #print(' '.join(comment))
         print('Hillary:\nPositive: ', h_pos, ' Negative: ', h_neg)
         print('Bernie:\nPositive: ', b_pos, ' Negative: ', b_neg)
         print('Total: ', h_pos+b_pos+h_neg+b_neg+o_pos+o_neg, 'Positive: ',
@@ -54,7 +54,7 @@ class Analyzer:
             elif word in self.hillonyms:
                 hillary_count += 1
         if hillary_count == bernie_count:
-            return 'n'
+            return '?'
         if hillary_count > bernie_count:
             return 'hill'
         return 'bern'

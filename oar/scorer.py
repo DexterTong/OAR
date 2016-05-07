@@ -33,6 +33,7 @@ class Scorer:
             res[row][col] += 1
             i += 1
         f.close()
+        print('Results Matrix: Actual tag in row, system tag in column')
         print('        H+     H-     B+     B-     ?+     ?-  Total\n', end='')
         for j in range(0, 4):
             if j == 0:
@@ -54,4 +55,38 @@ class Scorer:
             for m in range(0, 4):
                 col_total += res[m][l]
             print('{:>7}'.format(col_total), end='')
+        print('\nCandidate Tagging: Actual in row, system tag in column')
+        print('       H      B      ?\nH', end='')
+        hill_true = 0
+        for i in range(0, 2):
+            for j in range(0, 2):
+                hill_true += res[j][i]
+        print('{:>7}'.format(hill_true), end='')
+        bern_false = 0
+        for i in range(2, 4):
+            for j in range(0, 2):
+                bern_false += res[j][i]
+        print('{:>7}'.format(bern_false), end='')
+        hill_unk = 0
+        for i in range(4, 6):
+            for j in range(0, 2):
+                hill_unk += res[j][i]
+        print('{:>7}'.format(hill_unk), end='')
+        print('\nB', end='')
+        hill_false = 0
+        for i in range(0, 2):
+            for j in range(2, 4):
+                hill_false += res[j][i]
+        print('{:>7}'.format(hill_false), end='')
+        bern_true = 0
+        for i in range(2, 4):
+            for j in range(2, 4):
+                bern_true += res[j][i]
+        print('{:>7}'.format(bern_true), end='')
+        bern_unk = 0
+        for i in range(4, 6):
+            for j in range(2, 4):
+                bern_unk += res[j][i]
+        print('{:>7}'.format(bern_unk), end='')
+        print('\nPrecision: ')
         return res
