@@ -22,7 +22,7 @@ analyzer = analyzer.Analyzer()
 
 #comments = Scraper.scrape_comments('clinton', 1)
 #comments = Scraper.scrape_comments('4euxj8', 1)
-comments = Scraper.read_corpus('bernie1')
+comments = Scraper.read_corpus('bernie2')
 analyzer.analyze(comments, classifier, extractor)
 # for comment in comments:
 #     if classifier.classify(extractor.ext_features(comment)) == 'positive':
