@@ -2,7 +2,7 @@
 # Only use/modify as necessary, and don't overwrite other corpora!
 
 f = open('hillary2', 'r')
-nf = open('hillary3', 'w')
+nf = open('hillary2', 'w')
 i = 0
 line2 = ''
 for line in f:

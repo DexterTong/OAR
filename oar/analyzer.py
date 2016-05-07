@@ -13,29 +13,37 @@ class Analyzer:
         h_neg = 0
         b_pos = 0
         b_neg = 0
+        o_pos = 0
+        o_neg = 0
+        results = []
         for comment in comments:
             subject = self.decide_subject(comment)
             if classifier.classify(extractor.ext_features(comment)) == 'positive':
                 if subject is 'hill':
                     h_pos += 1
+                    results.append(['positive', 'hillary'])
                 elif subject is 'bern':
                     b_pos += 1
+                    results.append(['positive', 'bernie'])
                 else:
-                    continue
+                    results.append(['positive', '?'])
                 print('\033[92m', subject, ': \033[0m', end='')
             else:
                 if subject is 'hill':
                     h_neg += 1
+                    results.append(['negative', 'hillary'])
                 elif subject is 'bern':
                     b_neg += 1
+                    results.append(['negative', 'bernie'])
                 else:
-                    continue
+                    results.append(['negative', '?'])
                 print('\033[91m', subject, ': \033[0m', end='')
             print(' '.join(comment))
         print('Hillary:\nPositive: ', h_pos, ' Negative: ', h_neg)
         print('Bernie:\nPositive: ', b_pos, ' Negative: ', b_neg)
-        print('Total: ', h_pos+b_pos+h_neg+b_neg, 'Positive: ', h_pos+b_pos, 'Negative: ', h_neg+b_neg)
-        return h_pos, h_neg, b_pos, b_neg
+        print('Total: ', h_pos+b_pos+h_neg+b_neg+o_pos+o_neg, 'Positive: ',
+              h_pos+b_pos+o_pos, 'Negative: ', h_neg+b_neg+o_neg)
+        return results
 
     def decide_subject(self, comment):
         bernie_count = 0

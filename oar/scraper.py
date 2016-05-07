@@ -4,8 +4,9 @@ from string import punctuation
 
 class Scraper:
     r = None
-    #test_dir = '../test/'
-    test_dir = '../corpora/'        # Until I get test sets built
+    test_dir = '../test/'
+    corp_dir = '../corpora/'
+    #test_dir = '../corpora/'        # Until I get test sets built
 
     def __init__(self):
         self.r = praw.Reddit(user_agent='opinion_analysis_for_reddit')
@@ -53,8 +54,11 @@ class Scraper:
                 continue
         return scraped_comments
 
-    def read_corpus(self, filename):
-        f = open(self.test_dir + filename, 'rt')
+    def read_corpus(self, filename, which):
+        if which == 0:
+            f = open(self.test_dir + filename, 'rt')
+        else:
+            f = open(self.corp_dir + filename, 'rt')
         comments = []
         for line in f:
             comment = []
