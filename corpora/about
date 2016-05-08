@@ -1,10 +1,9 @@
-All of the corpora come from reddit comments on the following subreddits:
+All of the comments come from the following subreddits:
 
 /r/sandersforpresident
 /r/hillaryclinton
 /r/politics
 /r/politicaldiscussion
-/r/the_donald
 
 A particular thread is hand-picked and then comments are annotated manually. They are rated either negative or positive, or simply discarded.
 
@@ -29,5 +28,8 @@ hillary2: https://www.reddit.com/r/PoliticalDiscussion/comments/4ec37z
 bernie 4: https://www.reddit.com/r/SandersForPresident/comments/4euxmd
     pro-Bernie, anti-Hillary, responses to a debate between the two
 
-I've decided for now to skip /r/politics since the comments are pretty low-quality
-/r/the_donald is even worse. Sorry Drumpf.
+hillary 3: https://www.reddit.com/r/hillaryclinton/comments/4dmm12/
+    anti-Bernie, responses to an interview regarding his stance on Wall Street
+
+hillary_bernie2: https://www.reddit.com/r/politics/comments/3h7qj5
+    head-to-head polling results between Hillary and Bernie

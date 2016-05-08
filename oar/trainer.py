@@ -46,23 +46,27 @@ class Trainer:
     @staticmethod
     def train_classifier(source):
         corpus = []
-        if source == 'all':
-            for filename in os.listdir('../corpora'):
-                if filename != 'about' and filename != 'editor.py':
-                    f = open('../corpora/' + filename)
-                    for line in f:
-                        corpus.append(Trainer.parse_corpus(line))
-                    f.close()
-        else:
-            if source == '':
-                f = open('../corpora/hillary1')
-                print("Using corpora/hillary1")
-            else:
-                f = open('../corpora/' + source)
-                print("Using corpora/" + source)
-            for line in f:
-                corpus.append(Trainer.parse_corpus(line))
-            f.close()
+        # if source == 'all':
+        #     for filename in os.listdir('../corpora'):
+        #         if filename != 'about' and filename != 'editor.py':
+        #             f = open('../corpora/' + filename)
+        #             for line in f:
+        #                 corpus.append(Trainer.parse_corpus(line))
+        #             f.close()
+        # else:
+        #     if source == '':
+        #         f = open('../corpora/hillary1')
+        #         print("Using corpora/hillary1")
+        #     else:
+        #         f = open('../corpora/' + source)
+        #         print("Using corpora/" + source)
+        #     for line in f:
+        #         corpus.append(Trainer.parse_corpus(line))
+        #     f.close()
+        f = open('../corpora/' + source)
+        for line in f:
+            corpus.append(Trainer.parse_corpus(line))
+        f.close()
         all_words = []
         for comment in corpus:
             new_words = Trainer.get_words_in_comments(comment[0])

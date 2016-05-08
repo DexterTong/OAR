@@ -1,15 +1,20 @@
 # Silly little script to edit corpora formats as necessary
 # Only use/modify as necessary, and don't overwrite other corpora!
+import os, random
 
-f = open('hillary2', 'r')
-nf = open('hillary2', 'w')
+
+lines = open('all', 'r').readlines()
+random.shuffle(lines)
+train = open('train_corpus', 'wt')
+test = open('../test/test_corpus', 'wt')
 i = 0
-line2 = ''
-for line in f:
-    if i == 0:
-        line2 = line.rstrip() + '\t'
-        i += 1
-    else:
+for line in lines:
+    if i == 7:
         i = 0
-        nf.write(line2 + line.lstrip())
-nf.close()
+    if i == 0:
+        test.write(line)
+    else:
+        train.write(line)
+    i += 1
+test.close()
+train.close()

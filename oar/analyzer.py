@@ -2,8 +2,8 @@
 
 class Analyzer:
     # These of course assume that the only 2 people worth discussing are these two
-    bernonyms = {'bernie', 'bern', 'sanders', 'he', 'his', 'him', "he's", 'bernard'}
-    hillonyms = {'hillary', 'rodham', 'clinton', 'hrc', 'her', 'she', 'hill', "she's"}
+    bernonyms = {'bernie', 'bern', 'sanders', 'he', 'his', 'him', "he's", 'bernard', "bernie's", "sanders'"}
+    hillonyms = {'hillary', 'rodham', 'clinton', 'hrc', 'her', 'she', 'hill', "she's", "hillary's", "clinton's"}
 
     def __init__(self):
         return
