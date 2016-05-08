@@ -88,5 +88,9 @@ class Scorer:
             for j in range(2, 4):
                 bern_unk += res[j][i]
         print('{:>7}'.format(bern_unk), end='')
-        print('\nPrecision: ')
+        print('\nCorrect Ratio: ', (hill_true+bern_true)/(hill_true+bern_true+hill_false+bern_false+hill_unk+bern_unk))
+        print('Incorrect Ratio: ',
+              (hill_false+bern_false)/(hill_true+bern_true+hill_false+bern_false+hill_unk+bern_unk))
+        print('Indeterminate Ratio: ',
+              (hill_unk+bern_unk)/(hill_true+bern_true+hill_false+bern_false+hill_unk+bern_unk))
         return res

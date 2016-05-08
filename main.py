@@ -6,7 +6,7 @@ if len(sys.argv) == 3:
     test_corpus = sys.argv[2]
 else:
     training_corpus = 'all'         # Default values
-    test_corpus = 'hillary2'
+    test_corpus = 'bernie4'
 
 # 'all' for everything in ../corpora/ or '<corpus_name>' for a specific one
 CE = trainer.Trainer().train_classifier(training_corpus)
