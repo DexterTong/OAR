@@ -5,7 +5,7 @@ if len(sys.argv) == 3:
     training_corpus = sys.argv[1]
     test_corpus = sys.argv[2]
 else:
-    training_corpus = 'all'         # Default values
+    training_corpus = 'train_corpus'         # Default values
     test_corpus = 'test_corpus'
 
 # 'all' for everything in ../corpora/ or '<corpus_name>' for a specific one

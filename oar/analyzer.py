@@ -2,8 +2,8 @@
 
 class Analyzer:
     # These of course assume that the only 2 people worth discussing are these two
-    bernonyms = {'bernie', 'bern', 'sanders', 'he', 'his', 'him', "he's", 'bernard', "bernie's", "sanders'"}
-    hillonyms = {'hillary', 'rodham', 'clinton', 'hrc', 'her', 'she', 'hill', "she's", "hillary's", "clinton's"}
+    bernonyms = {'bernie', 'bern', 'sanders', 'bernard', "bernie's", "sanders'", 'he', 'his', 'him', "he's"}
+    hillonyms = {'hillary', 'rodham', 'clinton', 'hrc', 'hill', "hillary's", "clinton's", 'her', 'she', "she's"}
 
     def __init__(self):
         return
@@ -48,11 +48,20 @@ class Analyzer:
     def decide_subject(self, comment):
         bernie_count = 0
         hillary_count = 0
+        i = 0
         for word in comment:
             if word in self.bernonyms:
                 bernie_count += 1
+                if i == 0:
+                    i = 1
             elif word in self.hillonyms:
                 hillary_count += 1
+                if i == 0:
+                    i = 2
+        if i == 1:
+            bernie_count += 1
+        else:
+            hillary_count += 1
         if hillary_count == bernie_count:
             return '?'
         if hillary_count > bernie_count:
