@@ -17,8 +17,7 @@ class Scorer:
             row = 0
             split_line = line.split('\t')
             tone = split_line[1]
-            subject = split_line[2]
-            #print(subject == 'bernie')
+            subject = split_line[2].strip()
             if subject == 'bernie':
                 row = 2
             if tone == 'negative':
