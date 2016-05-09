@@ -58,10 +58,11 @@ class Analyzer:
                 hillary_count += 1
                 if i == 0:
                     i = 2
-        if i == 1:
-            bernie_count += 1
-        else:
-            hillary_count += 1
+        if bernie_count == hillary_count:
+            if i == 1:
+                bernie_count += 1
+            else:
+                hillary_count += 1
         if hillary_count == bernie_count:
             return '?'
         if hillary_count > bernie_count:

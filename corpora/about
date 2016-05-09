@@ -33,3 +33,11 @@ hillary 3: https://www.reddit.com/r/hillaryclinton/comments/4dmm12/
 
 hillary_bernie2: https://www.reddit.com/r/politics/comments/3h7qj5
     head-to-head polling results between Hillary and Bernie
+
+-----------------
+Other sources
+
+testdata.manual.2009.06.14.csv 
+	free corpus of 498 tweets, manually classified as positive, negative, and neutral
+	available for download at http://help.sentiment140.com/for-students
+	not used for now, but code to utilize it is left in place

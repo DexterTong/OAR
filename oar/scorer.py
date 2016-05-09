@@ -98,5 +98,5 @@ class Scorer:
         print('{:>7}'.format(res[0][1] + res[0][3] + res[2][1] + res[2][3] + res[0][5] + res[2][5]), end='')
         print('\n-', end='')
         print('{:>7}'.format(res[1][0] + res[1][2] + res[3][0] + res[3][2] + res[1][4] + res[3][4]), end='')
-        print('{:>7}'.format(res[1][1] + res[1][3] + res[3][1] + res[3][3] + res[1][5] + res[3][5]), end='')
+        print('{:>7}'.format(res[1][1] + res[1][3] + res[3][1] + res[3][3] + res[1][5] + res[3][5]))
         return res

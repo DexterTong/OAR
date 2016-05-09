@@ -9,20 +9,19 @@ else:
     test_corpus = 'test_corpus'
 
 # 'all' for everything in ../corpora/ or '<corpus_name>' for a specific one
-CE = trainer.Trainer().train_classifier(training_corpus)
+
+# CE = trainer.Trainer().train_classifier('reddit', training_corpus)
+# CE = trainer.Trainer().train_classifier('tweet', 'testdata.manual.2009.06.14.csv')
+CE = trainer.Trainer().train_classifier('both', 'testdata.manual.2009.06.14.csv', training_corpus)
 classifier = CE[0]
 extractor = CE[1]
 Scraper = scraper.Scraper()
 analyzer = analyzer.Analyzer()
 scorer = scorer.Scorer()
 
-#print(classifier.show_most_informative_features(50))
-#print(classifier.classify(extractor.ext_features(test.split())))
-#print(classifier._label_probdist.prob('positive'))
-#comments = Scraper.scrape_comments('clinton', 1)
-
 comments = Scraper.read_corpus(test_corpus, 0)
 results = analyzer.analyze(comments, classifier, extractor)
-#print(results)
 scorer.score(results, test_corpus)
-#print(classifier.show_most_informative_features(50))
+print(classifier.show_most_informative_features(10))
+#print(classifier._label_probdist.prob('positive'))
+

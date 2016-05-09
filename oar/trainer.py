@@ -1,7 +1,8 @@
 import nltk
 from string import punctuation
-import os
+import string
 from .extractor import Extractor
+from nltk.corpus import stopwords
 
 # Builds the classifier from training corpora
 
@@ -17,18 +18,33 @@ class Trainer:
         s2 = s1[0].split()
         s3 = []
         for word in s2:
-            s3.append(word.strip(punctuation))
+            temp = word.strip(punctuation)
+            #if temp not in stopwords.words('english'):
+            s3.append(temp)
         s1[0] = s3
-        # if len(s1) == 2:
-        #     if 'positive' in s1[1] or 'negative' in s1[1]:
-        #         s1[2] = ''
-        #     else:
-        #         s1[2] = s1[1]
-        #         s1[1] = ''
-        # s1[2] = s1[2].rstrip('\n')
         s1[1] = s1[1].rstrip('\n')
         s3 = tuple(s1)
         return s3
+
+    @staticmethod
+    def parse_corpus_tweet(tweet):
+        parts = tweet.split(',', 5)
+        #for part in parts:
+        #    part = part.strip(punctuation)
+        text = parts[5].replace('@', '').split()
+        parsed = [[], '']
+        for word in text:
+            temp = word.strip(punctuation).lower()
+            #if temp not in stopwords.words('english'):
+            parsed[0].append(temp)
+        if parts[0] == '"0"':
+            parsed[1] = 'negative'
+            return tuple(parsed)
+        if parts[0] == '"4"':
+            parsed[1] = 'positive'
+            return tuple(parsed)
+        return None
+
 
     @staticmethod
     def get_words_in_comments(comment):
@@ -44,7 +60,7 @@ class Trainer:
         return wordfeatures
 
     @staticmethod
-    def train_classifier(source):
+    def train_classifier(mode, source, source2 = ''):
         corpus = []
         # if source == 'all':
         #     for filename in os.listdir('../corpora'):
@@ -64,8 +80,24 @@ class Trainer:
         #         corpus.append(Trainer.parse_corpus(line))
         #     f.close()
         f = open('../corpora/' + source)
-        for line in f:
-            corpus.append(Trainer.parse_corpus(line))
+        if mode == 'tweet':
+            for line in f:
+                corpus.append(Trainer.parse_corpus_tweet(line))
+        elif mode == 'reddit':
+            for line in f:
+                corpus.append(Trainer.parse_corpus(line))
+        elif mode == 'both':
+            i = 0
+            for line in f:
+                temp = Trainer.parse_corpus_tweet(line)
+                if temp is not None:
+                    corpus.append(temp)
+            f.close()
+            f = open('../corpora/' + source2)
+            for line in f:
+                corpus.append(Trainer.parse_corpus(line))
+        else:
+            quit(1)
         f.close()
         all_words = []
         for comment in corpus:
